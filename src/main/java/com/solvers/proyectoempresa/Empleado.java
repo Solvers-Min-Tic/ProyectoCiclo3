@@ -5,10 +5,10 @@ public class Empleado {
     private String nombre;
     private String CorreoElectronico;
     private String direccion;
-    private String empresa;
+    private Empresa empresa;
     private String rol;
 
-    public Empleado(String nombre, String correoElectronico, String direccion, String empresa, String rol) {
+    public Empleado(String nombre, String correoElectronico, String direccion, Empresa empresa, String rol) {
         this.nombre = nombre;
         CorreoElectronico = correoElectronico;
         this.direccion = direccion;
@@ -40,13 +40,11 @@ public class Empleado {
         this.direccion = direccion;
     }
 
-    public String getEmpresa() {
-        return empresa;
-    }
+    public Empresa getEmpresa()
+    { return this.empresa; }
 
-    public void setEmpresa(String empresa) {
-        this.empresa = empresa;
-    }
+    public void setEmpresa(Empresa empresa)
+    { this.empresa = empresa; }
 
     public String getRol() {
         return rol;
