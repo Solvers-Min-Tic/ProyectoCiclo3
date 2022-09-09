@@ -1,12 +1,30 @@
-package com.solvers.proyectoempresa;
+package com.solvers.proyectoempresa.entities;
 
+import javax.persistence.*;
+
+@Entity
+@Table (name = "empleado")
 public class Empleado {
 
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idEmpleado;
+    @Column(name = "nombre")
     private String nombre;
+    @Column(name = "correo")
     private String CorreoElectronico;
+    @Column(name = "direccion")
     private String direccion;
+    @Column(name = "empresa")
     private Empresa empresa;
+
+
+    @Column(name = "rol")
     private String rol;
+
+    public Empleado() {
+    }
 
     public Empleado(String nombre, String correoElectronico, String direccion, Empresa empresa, String rol) {
         this.nombre = nombre;
@@ -14,6 +32,14 @@ public class Empleado {
         this.direccion = direccion;
         this.empresa = empresa;
         this.rol = rol;
+    }
+
+    public int getIdEmpleado() {
+        return idEmpleado;
+    }
+
+    public void setIdEmpleado(int idEmpleado) {
+        this.idEmpleado = idEmpleado;
     }
 
     public String getNombre() {

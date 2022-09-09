@@ -1,4 +1,4 @@
-package com.solvers.proyectoempresa;
+package com.solvers.proyectoempresa.entities;
 
 public class Empresa {
 
