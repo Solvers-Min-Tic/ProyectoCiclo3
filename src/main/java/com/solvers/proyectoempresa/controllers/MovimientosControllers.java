@@ -46,7 +46,4 @@ public class MovimientosControllers {
     public Response updateMovimiento(@RequestBody MovimientoDinero request){
         return this.movimientoService.updateMovimientoById(request);
     }
-
-
-
 }

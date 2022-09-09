@@ -1,6 +1,6 @@
 package com.solvers.proyectoempresa.entities;
 
-import com.solvers.proyectoempresa.Empleado;
+/*import com.solvers.proyectoempresa.Empleado;*/
 
 import javax.persistence.*;
 
