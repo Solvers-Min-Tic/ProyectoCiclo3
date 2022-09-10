@@ -14,9 +14,10 @@ public class MovimientoDinero {
     @Column(name = "conceptomovimiento")
     private String conceptoMovimiento;
 
-    /*@Column(name = "empleado")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="idEmpleado", nullable=false)
     private Empleado empleado;
-    */
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

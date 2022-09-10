@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
-@RestController
+@RestController //significa que va a responder en formato Json (responde datos, no una vista)
 @RequestMapping("movimientos")
 public class MovimientosControllers {
     private MovimientoService movimientoService;

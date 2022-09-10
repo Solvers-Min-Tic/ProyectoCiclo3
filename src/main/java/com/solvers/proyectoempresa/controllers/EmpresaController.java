@@ -4,26 +4,26 @@ import com.solvers.proyectoempresa.entities.Empresa;
 import com.solvers.proyectoempresa.service.EmpresaService;
 import com.solvers.proyectoempresa.service.Response;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
+@RequestMapping("empresa")
 public class EmpresaController {
 
     EmpresaService empresaService;
-    public EmpresaController(){
-        this.empresaService=empresaService;
+
+    public EmpresaController(EmpresaService empresaService) {
+        this.empresaService = empresaService;
     }
 
-    @GetMapping("/Empresa")
+    @GetMapping("/getempresa")
     public List<Empresa> getEmpresaList(){
         return this.empresaService.selectAll();
     }
 
-    @PostMapping("/Empresa")
+    @PostMapping("/newempresa")
     public Response createEmpresa(@RequestBody Empresa empresa){
         return this.empresaService.createEmpresa(empresa);
     }
