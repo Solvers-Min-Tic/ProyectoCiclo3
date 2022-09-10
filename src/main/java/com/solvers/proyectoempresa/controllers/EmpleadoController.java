@@ -4,18 +4,18 @@ import com.solvers.proyectoempresa.entities.Empleado;
 import com.solvers.proyectoempresa.service.EmpleadoService;
 import com.solvers.proyectoempresa.service.Response;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
+@RequestMapping("empleados")
 public class EmpleadoController {
 
     EmpleadoService empleadoService;
-    public EmpleadoController(){
-        this.empleadoService=empleadoService;
+
+    public EmpleadoController(EmpleadoService empleadoService) {
+        this.empleadoService = empleadoService;
     }
 
     @GetMapping("/Empleados")

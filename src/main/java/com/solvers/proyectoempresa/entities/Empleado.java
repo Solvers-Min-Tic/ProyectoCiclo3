@@ -1,6 +1,7 @@
 package com.solvers.proyectoempresa.entities;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table (name = "empleado")
@@ -16,8 +17,11 @@ public class Empleado {
     private String CorreoElectronico;
     @Column(name = "direccion")
     private String direccion;
-    @Column(name = "empresa")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="idEmpresa", nullable=false)
     private Empresa empresa;
+    @OneToMany(mappedBy="empleado")
+    private Set<MovimientoDinero> movimientoDinero;
 
 
     @Column(name = "rol")
@@ -28,7 +32,7 @@ public class Empleado {
 
     public Empleado(String nombre, String correoElectronico, String direccion, Empresa empresa, String rol) {
         this.nombre = nombre;
-        CorreoElectronico = correoElectronico;
+        this.CorreoElectronico = correoElectronico;
         this.direccion = direccion;
         this.empresa = empresa;
         this.rol = rol;
