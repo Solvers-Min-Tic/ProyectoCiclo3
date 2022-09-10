@@ -1,15 +1,27 @@
 package com.solvers.proyectoempresa.entities;
 
+import javax.persistence.*;
+
+@Entity
+@Table (name = "empresa")
 public class Empresa {
 
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idEmpresa;
+    @Column(name = "nombre")
     private String nombre;
+    @Column(name = "direccion")
     private String direccion;
+    @Column(name = "telefono")
     private int telefono;
+    @Column(name = "nit")
     private String nit;
 
-
     //Constructor (permite crear una instancia de la clase "Empresa")
-    public Empresa(String nombre, String direccion, int telefono, String nit) {
+    public Empresa(int idEmpresa, String nombre, String direccion, int telefono, String nit) {
+        this.idEmpresa = idEmpresa;
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
@@ -24,6 +36,11 @@ public class Empresa {
     }
 
     //Getters & Setters (permiten leer y modificar los atributos de la empresa creada)
+
+
+    public int getIdEmpresa() {
+        return idEmpresa;
+    }
 
     public String getNombre() {
         return nombre;
