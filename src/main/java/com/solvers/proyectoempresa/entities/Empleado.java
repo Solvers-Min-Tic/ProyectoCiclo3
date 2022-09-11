@@ -17,11 +17,11 @@ public class Empleado {
     private String CorreoElectronico;
     @Column(name = "direccion")
     private String direccion;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="idEmpresa", referencedColumnName = "idEmpresa")
+
+
+    @ManyToOne
+    @JoinColumn(name = "empresa")
     private Empresa empresa;
-    @OneToMany(mappedBy="empleado")
-    private Set<MovimientoDinero> movimientoDinero;
 
 
     @Column(name = "rol")

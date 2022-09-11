@@ -14,8 +14,8 @@ public class MovimientoDinero {
     @Column(name = "conceptomovimiento")
     private String conceptoMovimiento;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="idEmpleado", nullable=false)
+    @ManyToOne
+    @JoinColumn(name="empleado")
     private Empleado empleado;
 
 
