@@ -1,6 +1,7 @@
 package com.solvers.proyectoempresa.controllers;
 
 import com.solvers.proyectoempresa.entities.Empresa;
+import com.solvers.proyectoempresa.entities.MovimientoDinero;
 import com.solvers.proyectoempresa.service.EmpresaService;
 import com.solvers.proyectoempresa.service.Response;
 import org.springframework.stereotype.Controller;
@@ -28,4 +29,13 @@ public class EmpresaController {
         return this.empresaService.createEmpresa(empresa);
     }
 
+    @DeleteMapping("delete/{id}")
+    public Response deleteEmpresa(@PathVariable int id){
+        return this.empresaService.deleteEmpresaById(id);
+    }
+
+    @PutMapping("update")
+    public Response updateEmpresa(@RequestBody Empresa request){
+        return this.empresaService.updateEmpresaById(request);
+    }
 }

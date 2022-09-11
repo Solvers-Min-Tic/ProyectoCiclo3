@@ -18,7 +18,7 @@ public class Empleado {
     @Column(name = "direccion")
     private String direccion;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="idEmpresa", nullable=false)
+    @JoinColumn(name="idEmpresa", referencedColumnName = "idEmpresa")
     private Empresa empresa;
     @OneToMany(mappedBy="empleado")
     private Set<MovimientoDinero> movimientoDinero;

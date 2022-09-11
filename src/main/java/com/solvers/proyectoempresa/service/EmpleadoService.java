@@ -17,6 +17,7 @@ public class EmpleadoService {
     }
 
     public ArrayList<Empleado> selectAll(){
+
         return (ArrayList<Empleado>) this.empleadoRepository.findAll();
     }
 
