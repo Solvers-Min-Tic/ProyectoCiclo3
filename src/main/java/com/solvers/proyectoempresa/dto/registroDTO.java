@@ -4,44 +4,38 @@ import com.solvers.proyectoempresa.entities.TipoDoc;
 
 public class registroDTO {
 
-    private String nombres;
-    private String apellidos;
-    private String numeroDocumento;
-    private String mail1;
+    private String nombre;
+
+    private Integer numeroDocumento;
+
+    private String correoElectronico;
+
     private TipoDoc tipoDoc;
     private String password;
     private String validaPassword;
 
-    public String getNombres() {
-        return nombres;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getApellidos() {
-        return apellidos;
-    }
-
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
-    }
-
-    public String getNumeroDocumento() {
+    public Integer getNumeroDocumento() {
         return numeroDocumento;
     }
 
-    public void setNumeroDocumento(String numeroDocumento) {
+    public void setNumeroDocumento(Integer numeroDocumento) {
         this.numeroDocumento = numeroDocumento;
     }
 
-    public String getMail() {
-        return mail1;
+    public String getCorreoElectronico() {
+        return correoElectronico;
     }
 
-    public void setMail(String mail) {
-        this.mail1 = mail1;
+    public void setCorreoElectronico(String correoElectronico) {
+        this.correoElectronico = correoElectronico;
     }
 
     public TipoDoc getTipoDoc() {

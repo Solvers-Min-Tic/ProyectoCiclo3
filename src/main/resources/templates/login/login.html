@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
 
@@ -39,51 +39,45 @@
                         <div class="col-lg-6">
                             <div class="p-5">
                                 <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">Bienvenido.!</h1>
+                                    <h1 class="h4 text-gray-900 mb-4">Bienvenido a Solvers</h1>
                                 </div>
-                                <form action="/login/postlogin" method="post" class="user">
+                                <div th:if="${param.error}">
+                                    Usuario o contraseña no válidos
+                                </div>
+                                <div th:if="${param.logout}">
+                                    Gracias por consultarnos.
+                                </div>
+                                <form th:action="@{/login}" method="post" class="user">
                                     <div class="form-group">
-                                        <input required type="email" name="correoElectronico" class="form-control form-control-user"
-                                               id="exampleInputEmail" aria-describedby="emailHelp"
+                                        <input required type="email" name="username" class="form-control form-control-user"
+                                               aria-describedby="emailHelp"
                                                placeholder="Ingrese su usuario">
                                     </div>
                                     <div class="form-group">
                                         <input required type="password" name="password" class="form-control form-control-user"
-                                               id="exampleInputPassword" placeholder="Ingrese su contraseña">
+                                               placeholder="Ingrese su contraseña">
                                     </div>
-                                    <div class="form-group" align="center">
-                                        <div class="custom-control custom-checkbox small">
-                                            <input type="radio" name="rol" id="Administrador">
-                                            <label for="Administrador">Administrador</label>
-                                            &nbsp;&nbsp;&nbsp;&nbsp;
-                                            <input type="radio" name="rol" id="Usuario">
-                                            <label for="Usuario">Usuario</label>
-                                        </div>
-                                    </div>
-                                    <!--<div class="form-group">
-                                        <div class="custom-control custom-checkbox small">
-                                            <input type="checkbox" class="custom-control-input" id="customCheck">
-                                            <label class="custom-control-label" for="customCheck">Remember
-                                                Me</label>
-                                        </div>
-                                    </div>-->
                                     <button type="submit" class="btn btn-primary btn-user btn-block">
                                         Ingresar
                                     </button>
                                     <hr>
-                                    <!--<a href="index.html" class="btn btn-google btn-user btn-block">
-                                        <i class="fab fa-google fa-fw"></i> Login with Google
-                                    </a>
-                                    <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                                        <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
-                                    </a>-->
                                 </form>
+
+                                <hr>
+                                <div sec:authorize="!isAuthenticated()">
+                                    <a th:href="@{/oauth2/authorization/auth0}" class="btn btn-google btn-user btn-block">
+                                        <i class="fab fa-google fa-fw"></i> Login con Auth0
+                                    </a>
+                                </div>
+
+                                <div sec:authorize="isAuthenticated()">
+                                    <a class="btn btn-facebook btn-user btn-block">
+                                        <i class="fab fa-facebook-f fa-fw"></i> Ingresar a la plataforma
+                                    </a>
+                                </div>
                                 <hr>
                                 <div class="text-center">
-                                    <a class="small" href="forgot-password.html">¿Olvido su contraseña?</a>
-                                </div>
-                                <div class="text-center">
-                                    <a class="small" href="/login/registro">Eres nuevo, REGISTRESE AQUI.</a>
+                                    <a class="small" href="/registro">Eres nuevo, REGISTRESE AQUI.</a>
                                 </div>
                             </div>
                         </div>

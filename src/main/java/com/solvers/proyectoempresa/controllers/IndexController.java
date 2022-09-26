@@ -1,24 +1,25 @@
 package com.solvers.proyectoempresa.controllers;
 
 import com.solvers.proyectoempresa.entities.Empleado;
-import com.solvers.proyectoempresa.service.EmpleadoService;
 import com.solvers.proyectoempresa.service.Response;
+import com.solvers.proyectoempresa.service.EmpleadoService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping("empleados")
-public class EmpleadoController {
+@RequestMapping("index")
+public class IndexController {
 
+    //Se coloca una propiedad del Tipo UserSevice, para poder trabajar con la logica de negocio de la aplicacion
     private EmpleadoService empleadoService;
-
-    public EmpleadoController(EmpleadoService service) {
+    //Por medio de la inyección de dependencias, se inicializa el sevicio.
+    public IndexController(EmpleadoService service){
         this.empleadoService = service;
     }
 
-    @GetMapping("/getempleados")
-    public ArrayList<Empleado> getEmpleadoList(){
+    @GetMapping("getusuarios")
+    public ArrayList<Empleado> getUsuarios(){
         return this.empleadoService.selectAll();
     }
 
@@ -27,19 +28,18 @@ public class EmpleadoController {
         return this.empleadoService.selectById(id);
     }
 
-    @PostMapping("/crearempleados")
-    public Response createEmpleado(@RequestBody Empleado request){
-        return this.empleadoService.createUser(request);
+    @PostMapping("create")
+    public Response createEmpleado(@RequestBody Empleado request){ return this.empleadoService.createUser(request);
     }
 
     @DeleteMapping("delete/{id}")
-    public Response deleteEmpleado(@PathVariable int id){
+    public Response deleteUserById(@PathVariable int id){
         return this.empleadoService.deleteUserById(id);
     }
 
     @PutMapping("update")
-    public Response updateEmpleado(@RequestBody Empleado request){
-        return this.empleadoService.updateUser(request);
+    public Response updateUser(@RequestBody Empleado request){
+         return   this.empleadoService.updateUserName(request);
     }
 
     @PostMapping("auth")
@@ -52,5 +52,4 @@ public class EmpleadoController {
     public Response otherUpdate(@RequestBody Empleado request){
         return   this.empleadoService.updateUser(request);
     }
-
 }

@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 public class TipoDocService {
 
-
     private ITipoDocRepository repository;
 
     public TipoDocService(ITipoDocRepository rep){
@@ -39,6 +38,4 @@ public class TipoDocService {
         response.setMessage("Documento registrado exitosamente");
         return response;
     }
-
-
 }
