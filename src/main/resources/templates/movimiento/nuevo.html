@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear nuevo movimiento</title>
+</head>
+<body>
+<form action="/movimiento/nuevo-movimiento" method="post">
+<div>
+    <select id="usuario" name="empleado">
+        <option value="1">usuario1</option>
+        <option value="2">usuario2</option>
+    </select>
+    <input type="number" id="monto" name="monto"/>
+    <input type="text" id="concepto" name="conceptoMovimiento"/>
+    <button type="submit" id="botonguardar">guardar</button>
+</div>
+</form>
+</body>
+</html>
