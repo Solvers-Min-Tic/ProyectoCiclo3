@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear nuevo movimiento</title>
+</head>
+<body>
+<form action="/movimiento/nuevo-movimiento" method="post">
+<div>
+    <select id="empleado" name="empleado">
+
+        <option th:each="empleado: ${listaEmpleados}" th:value="${empleado.idEmpleado}" th:text="${empleado.nombre}"> </option>
+
+    </select>
+    <input type="number" id="monto" name="monto"/>
+    <input type="text" id="concepto" name="conceptoMovimiento"/>
+    <button type="submit" id="botonguardar">guardar</button>
+</div>
+</form>
+</body>
+</html>

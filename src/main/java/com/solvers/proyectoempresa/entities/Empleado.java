@@ -25,12 +25,12 @@ public class Empleado {
 
 
     @Column(name = "rol")
-    private String rol;
+    private int rol;
 
     public Empleado() {
     }
 
-    public Empleado(String nombre, String correoElectronico, String direccion, Empresa empresa, String rol) {
+    public Empleado(String nombre, String correoElectronico, String direccion, Empresa empresa, int rol) {
         this.nombre = nombre;
         this.CorreoElectronico = correoElectronico;
         this.direccion = direccion;
@@ -76,11 +76,11 @@ public class Empleado {
     public void setEmpresa(Empresa empresa)
     { this.empresa = empresa; }
 
-    public String getRol() {
+    public int getRol() {
         return rol;
     }
 
-    public void setRol(String rol) {
+    public void setRol(int rol) {
         this.rol = rol;
     }
 }

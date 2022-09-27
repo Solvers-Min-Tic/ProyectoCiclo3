@@ -37,10 +37,10 @@ public class MovimientoDinero {
         return conceptoMovimiento;
     }
 
-   /* public Empleado getEmpleado() {
+    public Empleado getEmpleado() {
         return empleado;
     }
-    */
+
 
     public int getIdMovimiento() {
         return idMovimiento;
@@ -53,10 +53,9 @@ public class MovimientoDinero {
         this.conceptoMovimiento = conceptoMovimiento;
     }
 
-   /* public void setEmpleado(Empleado empleado) {
+   public void setEmpleado(Empleado empleado) {
         this.empleado = empleado;
     }
-    */
 
 
     public void setIdMovimiento(int idMovimiento) {
