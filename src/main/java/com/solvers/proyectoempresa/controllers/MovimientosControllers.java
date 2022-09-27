@@ -11,13 +11,14 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 //@RestController //significa que va a responder en formato Json (responde datos, no una vista)
 @Controller  //significa que va a responder en formato HTML (responde una vista)
 //@RequestMapping("movimientos")
 public class MovimientosControllers {
     @Autowired
-    private IServiceMovimientoDinero movimientoService;
+    private MovimientoService movimientoService;
     @Autowired
     private EmpleadoService empleadoService;
     @Autowired
@@ -26,9 +27,11 @@ public class MovimientosControllers {
     // Mostrar los movimientos de una empresa específica por id
     @GetMapping("/empresa/movimientos/{id}") //Presenta la lista de movimientos realizados por una empresa
     public String getAllByEmpresa(@PathVariable int id, Model model){  //PathVariable porque cambia conforme al id
-        model.addAttribute("movimientos", movimientoService.findAllByEmpresa(id));
-        model.addAttribute("total", movimientoService.montoTotal(id));
-        return "movimientosPorEmpresa"; //retorna el archivo HTML con la vista de movimientos
+
+        List<MovimientoDinero> movimientosDB = this.movimientoService.findAllByEmpresa(id);
+        model.addAttribute("movimientos",movimientosDB);
+        model.addAttribute("total", this.movimientoService.montoTotal(id));
+        return "movimiento/movimientos"; //retorna el archivo HTML con la vista de movimientos
     }
     @GetMapping("/empresa/nuevo-movimiento")
     public String crearMovimiento(Model empleado, Model empresa){
@@ -43,7 +46,7 @@ public class MovimientosControllers {
     public RedirectView createMovimiento(MovimientoDinero request){
         Response response= this.movimientoService.createMovimiento(request);
         if (response.getCode()==200) {
-            return new RedirectView("/empresa/nuevo-movimiento");
+            return new RedirectView("/empresa/movimientos/1");
         } else {
             return new RedirectView("/empresa/nuevo-movimiento");
         }

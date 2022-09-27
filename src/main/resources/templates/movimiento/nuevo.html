@@ -2,25 +2,45 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Crear nuevo movimiento</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
 </head>
 <body>
+<div class="container">
 <form action="/empresa/nuevo-movimiento" method="post">
 <div>
-    <select id="empleado" name="empleado">
+    <div class="col-12 mb-3">
+        <label for="empleado" class="form-label">Seleccione un empleado</label>
+    <select class="form-select" id="empleado" name="empleado">
 
         <option th:each="empleado: ${listaEmpleados}" th:value="${empleado.idEmpleado}" th:text="${empleado.nombre}"> </option>
 
     </select>
-    <select id="empresa" name="empresa">
+    </div>
+    <div class="col-12 mb-3">
+        <label for="empresa" class="form-label">Seleccione una empresa</label>
+    <select class="form-select" id="empresa" name="empresa">
 
         <option th:each="empresa: ${listaEmpresas}" th:value="${empresa.idEmpresa}" th:text="${empresa.nombre}"> </option>
 
     </select>
-    <input type="number" id="monto" name="monto"/>
-    <input type="text" id="concepto" name="conceptoMovimiento"/>
-    <button type="submit" id="botonguardar">guardar</button>
+    </div>
+    <div class="col-12 mb-3">
+        <label for="monto" class="form-label">Digite un monto</label>
+    <input class="form-control" type="number" id="monto" name="monto"/>
+    </div>
+    <div class="col-12 mb-3">
+        <label for="concepto" class="form-label">Digite un concepto</label>
+    <input class="form-control" type="text" id="concepto" name="conceptoMovimiento"/>
+    </div>
+    <div class="col-12 mb-3">
+    <button class="btn btn-primary" type="submit" id="botonguardar">guardar</button>
+    </div>
 </div>
 </form>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 </body>
 </html>
