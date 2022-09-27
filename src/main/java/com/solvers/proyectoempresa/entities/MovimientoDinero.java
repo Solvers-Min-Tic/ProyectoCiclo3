@@ -62,4 +62,11 @@ public class MovimientoDinero {
         this.idMovimiento = idMovimiento;
     }
 
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
 }

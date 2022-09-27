@@ -31,7 +31,14 @@ public class MovimientoService implements IServiceMovimientoDinero{
     public float montoTotal(int id) {  //Calcula el monto total de los movimientos realizados por una empresa
         return movimientoRepository.montoTotal(id);
     }
+    public Response createMovimiento(MovimientoDinero data){
+        Response response = new Response();
+        this.movimientoRepository.save(data);
+        response.setCode(200);
+        response.setMessage("Movimiento creado exitosamente");
 
+        return response;
+    }
     /*
     public MovimientoService(IMovimientoRepository rep){
         this.movimientoRepository = rep;

@@ -8,6 +8,7 @@ public interface IServiceMovimientoDinero {
 
     //Crear movimiento de dinero
     public MovimientoDinero create(MovimientoDinero movimientoDinero);
+    public Response createMovimiento(MovimientoDinero movimientoDinero);
 
     //Obtener una lista de los movimientos realizados por una empresa
     public List<MovimientoDinero> findAllByEmpresa(int id);

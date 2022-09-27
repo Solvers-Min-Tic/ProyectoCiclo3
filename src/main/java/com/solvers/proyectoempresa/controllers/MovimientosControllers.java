@@ -1,13 +1,14 @@
 package com.solvers.proyectoempresa.controllers;
 
+import com.solvers.proyectoempresa.entities.Empleado;
+import com.solvers.proyectoempresa.entities.Empresa;
 import com.solvers.proyectoempresa.entities.MovimientoDinero;
-import com.solvers.proyectoempresa.service.IServiceMovimientoDinero;
-import com.solvers.proyectoempresa.service.MovimientoService;
-import com.solvers.proyectoempresa.service.Response;
+import com.solvers.proyectoempresa.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.ArrayList;
 
@@ -17,6 +18,10 @@ import java.util.ArrayList;
 public class MovimientosControllers {
     @Autowired
     private IServiceMovimientoDinero movimientoService;
+    @Autowired
+    private EmpleadoService empleadoService;
+    @Autowired
+    private EmpresaService empresaService;
 
     // Mostrar los movimientos de una empresa específica por id
     @GetMapping("/empresa/movimientos/{id}") //Presenta la lista de movimientos realizados por una empresa
@@ -25,7 +30,26 @@ public class MovimientosControllers {
         model.addAttribute("total", movimientoService.montoTotal(id));
         return "movimientosPorEmpresa"; //retorna el archivo HTML con la vista de movimientos
     }
+    @GetMapping("/empresa/nuevo-movimiento")
+    public String crearMovimiento(Model empleado, Model empresa){
 
+        ArrayList<Empleado> empleadoDB = this.empleadoService.selectAll();
+        ArrayList<Empresa> empresasDB = this.empresaService.selectAll();
+        empleado.addAttribute("listaEmpleados",empleadoDB);
+        empresa.addAttribute("listaEmpresas",empresasDB);
+        return "movimiento/nuevo";
+    }
+    @PostMapping("/empresa/nuevo-movimiento")
+    public RedirectView createMovimiento(MovimientoDinero request){
+        Response response= this.movimientoService.createMovimiento(request);
+        if (response.getCode()==200) {
+            return new RedirectView("/empresa/nuevo-movimiento");
+        } else {
+            return new RedirectView("/empresa/nuevo-movimiento");
+        }
+
+
+    }
 
     /*
     // Crear un movimiento de dinero
