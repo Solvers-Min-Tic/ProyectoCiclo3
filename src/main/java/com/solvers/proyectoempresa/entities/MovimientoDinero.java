@@ -18,6 +18,10 @@ public class MovimientoDinero {
     @JoinColumn(name="empleado")
     private Empleado empleado;
 
+    @ManyToOne
+    @JoinColumn(name="empresa") //Permite asociar el movimiento de dinero a una empresa
+    private Empresa empresa;
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

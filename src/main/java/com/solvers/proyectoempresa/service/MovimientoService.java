@@ -2,16 +2,37 @@ package com.solvers.proyectoempresa.service;
 
 import com.solvers.proyectoempresa.entities.MovimientoDinero;
 import com.solvers.proyectoempresa.repository.IMovimientoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transaction;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
-public class MovimientoService {
+public class MovimientoService implements IServiceMovimientoDinero{
+    @Autowired
+    IMovimientoRepository movimientoRepository;
 
-    private IMovimientoRepository movimientoRepository;
+    @Override
+    public MovimientoDinero create(MovimientoDinero movimientoDinero){  //Crea un movimiento de dinero
+        return movimientoRepository.save(movimientoDinero);
+    }
 
+    @Override
+    public List<MovimientoDinero> findAllByEmpresa(int id) {   //Crea una lista con los movimientos de una empresa
+        List<MovimientoDinero> listaMovimientoDinero = new ArrayList<>();
+        movimientoRepository.findByEmpresa(id).forEach(listaMovimientoDinero::add);
+        return listaMovimientoDinero;
+    }
+
+    @Override
+    public float montoTotal(int id) {  //Calcula el monto total de los movimientos realizados por una empresa
+        return movimientoRepository.montoTotal(id);
+    }
+
+    /*
     public MovimientoService(IMovimientoRepository rep){
         this.movimientoRepository = rep;
     }
@@ -81,4 +102,7 @@ public class MovimientoService {
 
 
     }
+
+    public Object findAll() {
+    } */
 }
