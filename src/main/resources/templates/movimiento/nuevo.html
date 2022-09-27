@@ -7,9 +7,10 @@
 <body>
 <form action="/movimiento/nuevo-movimiento" method="post">
 <div>
-    <select id="usuario" name="empleado">
-        <option value="1">usuario1</option>
-        <option value="2">usuario2</option>
+    <select id="empleado" name="empleado">
+
+        <option th:each="empleado: ${listaEmpleados}" th:value="${empleado.idEmpleado}" th:text="${empleado.nombre}"> </option>
+
     </select>
     <input type="number" id="monto" name="monto"/>
     <input type="text" id="concepto" name="conceptoMovimiento"/>
