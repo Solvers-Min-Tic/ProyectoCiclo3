@@ -16,8 +16,17 @@
       </a>
     </div>
     <div class="col-12 mb-3">
-      <p>total movimiento empresa</p>
-      <p th:text="${total}"></p>
+      <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">Saldo total de movimientos de la empresa</th>
+        </tr>
+        <thead>
+        <tbody>
+        <tr>
+          <td th:text="${total}"></td>
+        </tr>
+        <tbody>
     </div>
     <div class="col-12">
       <table class="table">
