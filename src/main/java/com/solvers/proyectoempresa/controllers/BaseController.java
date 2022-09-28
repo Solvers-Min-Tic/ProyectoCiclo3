@@ -12,6 +12,7 @@ public class BaseController {
 
     @Autowired
     protected EmpleadoService service;
+
     protected Empleado seguridad(){
         //ingreso a la información de spring security
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

@@ -1,5 +1,6 @@
 package com.solvers.proyectoempresa.dto;
 
+import com.solvers.proyectoempresa.entities.EnumRol;
 import com.solvers.proyectoempresa.entities.TipoDoc;
 
 public class registroDTO {
@@ -10,9 +11,13 @@ public class registroDTO {
 
     private String correoElectronico;
 
+    private String direccion;
+
     private TipoDoc tipoDoc;
     private String password;
     private String validaPassword;
+
+    private EnumRol rol;
 
     public String getNombre() {
         return nombre;
@@ -60,5 +65,21 @@ public class registroDTO {
 
     public void setValidaPassword(String validaPassword) {
         this.validaPassword = validaPassword;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public EnumRol getRol() {
+        return rol;
+    }
+
+    public void setRol(EnumRol rol) {
+        this.rol = rol;
     }
 }

@@ -33,6 +33,7 @@ public class Empleado {
     @Column(name = "rol")
     private EnumRol rol;
 
+
     public int getIdEmpleado() {
         return idEmpleado;
     }

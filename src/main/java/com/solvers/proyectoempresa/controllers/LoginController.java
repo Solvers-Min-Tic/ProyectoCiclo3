@@ -15,12 +15,12 @@ import org.springframework.web.servlet.view.RedirectView;
 import java.util.ArrayList;
 
 @Controller
-public class LogueoController {
+public class LoginController {
 
     private EmpleadoService service;
     private TipoDocService docService;
 
-    public LogueoController(EmpleadoService service, TipoDocService docService){
+    public LoginController(EmpleadoService service, TipoDocService docService){
         this.service = service ;
         this.docService = docService;
     }
@@ -29,17 +29,18 @@ public class LogueoController {
     public String root(){
         return "login/login";
     }
-
     @GetMapping("login")
     public String login(){
         return "login/login";
     }
+
     @GetMapping("registro")
-    public String registro(Model tipodoc){
-        ArrayList<TipoDoc> tipoDocDB = this.docService.selectAll();
-        //thymeleaf
-        tipodoc.addAttribute("misdocumentos",tipodoc);
-        tipodoc.addAttribute("texto","Bienvenidos");
+    public String registro(Model tiposdocumento){
+        //Cargamos los documentos desde la logica de negocio.
+        ArrayList<TipoDoc> tiposDocumentoDB = this.docService.selectAll();
+        //Pasamos la infomación al model de thymeleaf
+        tiposdocumento.addAttribute("misdocumentos",tiposDocumentoDB);
+        tiposdocumento.addAttribute("texto","Bienvenidos");
 
         return "login/registro";
     }
@@ -51,7 +52,7 @@ public class LogueoController {
             return new RedirectView("/inicio");
         }
         else{
-            return new RedirectView("/login/error");
+            return new RedirectView("/error");
         }
     }
 
@@ -59,30 +60,32 @@ public class LogueoController {
     public RedirectView postregisto(registroDTO data){
 
         if(data.getPassword().equals(null) || data.getPassword().equals("")){
-            System.out.println("Contraseña invalida");
-            return new RedirectView("/login/error");
+            System.out.println("Contraseña no valida");
+            return new RedirectView("/error");
         }
         if(!data.getPassword().equals(data.getValidaPassword())){
             System.out.println("Las contraseñas no coinciden.");
-            return new RedirectView("/login/error");
+            return new RedirectView("/error");
         }
 
-        Empleado empleado = new Empleado();
+        Empleado user = new Empleado();
 
         //Mapping
-        empleado.setCorreoElectronico(data.getCorreoElectronico());
-        empleado.setPassword(data.getPassword());
-        empleado.setNombre(data.getNombre());
-        empleado.setNumeroDocumento(data.getNumeroDocumento());
+        user.setCorreoElectronico(data.getCorreoElectronico());
+        user.setDireccion(data.getDireccion());
+        user.setPassword(data.getPassword());
+        user.setNombre(data.getNombre());
+        user.setNumeroDocumento(data.getNumeroDocumento());
+        user.setTipoDoc(data.getTipoDoc());
+        user.setRol(data.getRol());
 
-
-        Response response = this.service.createUser(empleado);
+        Response response = this.service.createUser(user);
         System.out.println(response.getMessage());
         if(response.getCode() == 200){
-            return new RedirectView("/inicio");
+            return new RedirectView("/login");
         }
         else{
-            return new RedirectView("/login/error");
+            return new RedirectView("/error");
         }
     }
 
@@ -90,7 +93,5 @@ public class LogueoController {
     public String error(){
         return "login/error";
     }
-
-
 
 }

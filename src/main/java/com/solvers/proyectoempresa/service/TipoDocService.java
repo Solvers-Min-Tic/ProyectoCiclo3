@@ -23,7 +23,7 @@ public class TipoDocService {
     ///Metodo que permite registrar un documento
     public Response createDocumento(TipoDoc data){
 
-        //Debo validar si el documento ya existe
+        //validar documento existe
         ArrayList<TipoDoc> documentos = this.repository.findByNombre(data.getNombre());
         if(documentos != null && documentos.size() > 0){
             Response response = new Response();

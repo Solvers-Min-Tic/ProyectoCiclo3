@@ -1,6 +1,7 @@
 package com.solvers.proyectoempresa.security;
 
 
+import com.solvers.proyectoempresa.controllers.LogoutHandler;
 import com.solvers.proyectoempresa.service.EmpleadoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -15,7 +16,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import java.util.ArrayList;
@@ -40,15 +40,14 @@ public class WebSecurityConfig implements UserDetailsService {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
-                //Obliga a la Autenticacion en cada pagina
                 .authorizeHttpRequests()
-                        .antMatchers("/", "/home","/**/*.js", "/**/*.css","/registro","/postregistro","/error").permitAll()
-                        .anyRequest().authenticated().and()
+                .antMatchers("/", "/home","/**/*.js", "/**/*.css","/registro","/postregistro","/error").permitAll()
+                .anyRequest().authenticated().and()
                 .oauth2Login().loginPage("/login").defaultSuccessUrl("/inicio",true)
                 .and()
                 .formLogin()
-                        .loginPage("/login")
-                        .permitAll().defaultSuccessUrl("/inicio",true)
+                .loginPage("/login")
+                .permitAll().defaultSuccessUrl("/inicio",true)
                 .and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .addLogoutHandler(logoutHandler);

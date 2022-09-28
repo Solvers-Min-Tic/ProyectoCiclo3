@@ -7,61 +7,63 @@ import org.springframework.stereotype.Service;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
-import javax.persistence.Id;
 import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
 public class EmpleadoService {
 
-    private IEmpleadoRepository userRepository;
+    public EmpleadoService() {
+
+    }
+
+    private IEmpleadoRepository empleadoRepository;
 
     public EmpleadoService(IEmpleadoRepository rep){
-        this.userRepository = rep;
+        this.empleadoRepository = rep;
     }
 
     ///Metodo que me permite obtener todos los usuarios de la base de datos.
     public ArrayList<Empleado> selectAll(){
-        return (ArrayList<Empleado>) this.userRepository.findAll();
+        return (ArrayList<Empleado>) this.empleadoRepository.findAll();
     }
 
     public Response createUser(Empleado data){
         Response response = new Response();
 
-        //Logica de negocio
-        //Validamos datos
+        //Valida datos
         if(!isValidEmailAddress(data.getCorreoElectronico())){
             response.setCode(500);
-            response.setMessage("Error, empleado inválido.");
+            response.setMessage("Error, el usuario dado no es válido.");
             return  response;
         }
 
         //Validamos password
         if(data.getPassword().equals(null) || data.getPassword().equals("")){
             response.setCode(500);
-            response.setMessage("Error, contraseña inválida.");
+            response.setMessage("Error, su contraseña no es válida.");
             return  response;
         }
 
-        ArrayList<Empleado> existe = this.userRepository.existeCorreo(data.getCorreoElectronico());
+        ArrayList<Empleado> existe = this.empleadoRepository.existeCorreo(data.getCorreoElectronico());
         if(existe != null && existe.size() > 0){
             response.setCode(500);
             response.setMessage("Error, el correo electronico ya esta en uso.");
             return  response;
         }
 
-        ///Encripto contraseña.
+        ///Encriptar la contraseña.
         BCryptPasswordEncoder encrypt = new BCryptPasswordEncoder();
         data.setPassword(encrypt.encode(data.getPassword()));
 
-        this.userRepository.save(data);
+        this.empleadoRepository.save(data);
         response.setCode(200);
         response.setMessage("Usuario registrado exitosamente");
         return response;
     }
 
     public Empleado selectById(int Id){
-        Optional<Empleado> existe = this.userRepository.findById(Id);
+        Optional<Empleado> existe = this.empleadoRepository.findById(Id);
         if(existe.isPresent()){
             return existe.get();
         }
@@ -71,14 +73,14 @@ public class EmpleadoService {
     }
 
     public Empleado selectByUserName(String username){
-        Empleado existe = this.userRepository.finByUserName(username);
+        Empleado existe = this.empleadoRepository.finByUserName(username);
         return existe;
     }
 
     public Response deleteUserById(int Id){
         Response response = new Response();
         try {
-            this.userRepository.deleteById(Id);
+            this.empleadoRepository.deleteById(Id);
             response.setCode(200);
             response.setMessage("Usuario eliminado exitosamente");
             return response;
@@ -96,7 +98,7 @@ public class EmpleadoService {
 
         if(data.getIdEmpleado() == 0){
             response.setCode(500);
-            response.setMessage("Error, Id de usuario inválido.");
+            response.setMessage("Error, el empleado no es válido.");
             return response;
         }
 
@@ -121,10 +123,14 @@ public class EmpleadoService {
         }
 
         exists.setCorreoElectronico(data.getCorreoElectronico());
+        exists.setNombre(data.getNombre());
+        exists.setNumeroDocumento(data.getNumeroDocumento());
+        exists.setDireccion(data.getDireccion());
 
-        this.userRepository.save(exists);
+
+        this.empleadoRepository.save(exists);
         response.setCode(200);
-        response.setMessage("Empleado modificado exitosamente");
+        response.setMessage("Usuario modificado exitosamente");
         return  response;
     }
 
@@ -135,7 +141,7 @@ public class EmpleadoService {
 
         if(data.getIdEmpleado() == 0){
             response.setCode(500);
-            response.setMessage("Error, Id de usuario inválido.");
+            response.setMessage("Error, el Id del usuario no es válido.");
             return response;
         }
 
@@ -143,13 +149,16 @@ public class EmpleadoService {
         Empleado exists = selectById(data.getIdEmpleado());
         if(exists == null){
             response.setCode(500);
-            response.setMessage("Error, usuario no existe en base de datos.");
+            response.setMessage("Error, el usuario no existe en la base de datos.");
             return response;
         }
 
+        exists.setCorreoElectronico(data.getCorreoElectronico());
         exists.setNombre(data.getNombre());
+        exists.setNumeroDocumento(data.getNumeroDocumento());
+        exists.setDireccion(data.getDireccion());
 
-        this.userRepository.save(exists);
+        this.empleadoRepository.save(exists);
         response.setCode(200);
         response.setMessage("Usuario modificado exitosamente");
         return  response;
@@ -173,7 +182,7 @@ public class EmpleadoService {
             return  response;
         }
 
-        ArrayList<Empleado> existe = this.userRepository.validaCredenciales(data.getCorreoElectronico(),data.getPassword());
+        ArrayList<Empleado> existe = this.empleadoRepository.validaCredenciales(data.getCorreoElectronico(),data.getPassword());
         if(existe != null && existe.size() > 0){
             response.setCode(200);
             response.setMessage("Usuario autenticado exitosamente.");
